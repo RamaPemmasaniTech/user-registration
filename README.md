@@ -38,12 +38,20 @@ clean package
 ```
 ### Step 6: Write the Dockerfile
 ```xml
-FROM tomcat:9.0.96-jdk17
-RUN apt update
-WORKDIR /usr/local/tomcat
-ADD target/*.war webapps/
-EXPOSE 8080
-CMD ["catalina.sh", "run"]
+# Use an OpenJDK base image
+FROM openjdk:17-jdk-slim
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the JAR file from the target directory
+COPY target/*.jar /app/user-registration.jar
+
+# Expose the application's port (update if your application uses a specific port)
+EXPOSE 80
+
+# Command to run the application
+CMD ["java", "-jar", "/app/user-registration.jar"]
 
 ```
 ### Step 7: Build and tag the Docker image
