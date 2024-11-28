@@ -155,8 +155,8 @@ internal:
   enabled: true
   className: "alb"
   hosts:
-    - hostname: user-management-dev.techworldwithmurali.in
-      service: user-management
+    - hostname: user-registration-dev.techworldwithmurali.in
+      service: user-registration
       port: 80
 ```
 #### 5. **Connect to the EKS Cluster**
