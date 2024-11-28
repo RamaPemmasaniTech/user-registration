@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.murali</groupId>
-	<artifactId>User-Management</artifactId>
+	<artifactId>user-registration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url/>
@@ -60,7 +60,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>users</finalName>
+		<finalName>user-registration</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
