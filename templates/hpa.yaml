@@ -3,9 +3,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ .Release.Name }}
-  {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
-  {{- end }}
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
