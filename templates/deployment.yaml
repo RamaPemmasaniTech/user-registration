@@ -52,7 +52,7 @@ spec:
           {{- if .Values.application.env }}
           env:
             {{- range .Values.application.env }}
-            - name: {{ .name | title | upper }}
+            - name: {{ .name }}
               value: "{{ .value }}"
             {{- end }}
           {{- end }}
