@@ -2,9 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
-  {{- if .Values.namespace }}
   namespace: {{ .Values.namespace }}
-  {{- end }}
   labels:
     app.kubernetes.io/name: {{ .Release.Name }}
     helm.sh/chart: {{ .Chart.Name }}
@@ -29,7 +27,6 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Release.Name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        environment: {{ .Values.environment }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -55,7 +52,7 @@ spec:
           {{- if .Values.application.env }}
           env:
             {{- range .Values.application.env }}
-            - name: {{ .name | title | upper }}
+            - name: {{ .name }}
               value: "{{ .value }}"
             {{- end }}
           {{- end }}
@@ -79,6 +76,7 @@ spec:
             timeoutSeconds: {{ default 10 .Values.application.readinessProbe.timeout }}
             failureThreshold: {{ default 10 .Values.application.readinessProbe.failureThreshold }}
           {{- end }}
+            {{- if .Values.application.startupProbe }}
           startupProbe:
             httpGet:
               path: "{{ .Values.application.startupProbe.path }}"
@@ -87,7 +85,7 @@ spec:
             initialDelaySeconds: {{ .Values.application.startupProbe.delay }}
             timeoutSeconds: {{ default 10 .Values.application.startupProbe.timeout }}
             failureThreshold: {{ default 10 .Values.application.startupProbe.failureThreshold }}
-          {{- end }}          
+          {{- end }}
           resources:
             limits:
               cpu: {{ default "2" .Values.resources.limits.cpu }}
