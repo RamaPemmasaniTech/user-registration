@@ -22,7 +22,7 @@
 
 **Step 1**: Clone the Helm chart repository.  
 ```bash
-git clone https://github.com/techworldwithmurali/helmchart.git -b helm-deploy-on-eks-ecr
+git clone https://github.com/techworldwithmurali/user-registration.git -b helm-deploy-on-eks-ecr
 cd <repository-directory>
 ```
 ---
