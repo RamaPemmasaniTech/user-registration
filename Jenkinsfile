@@ -31,7 +31,7 @@ stage('Clone') {
                     // Deploy the application with the provided parameters
                     sh '''
 		    cd helm-chart
-                    helm upgrade --install $RELEASE_NAME . --namespace $namespace  --set image.tag=$ImageTag --force --wait --timeout 600s
+                    helm upgrade --install -f values-dev.yaml $RELEASE_NAME . --namespace $namespace  --set image.tag=$ImageTag --force --wait --timeout 600s
                     '''
                 }
             }
