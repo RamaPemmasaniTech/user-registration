@@ -10,6 +10,18 @@ stage('Clone') {
             }
         }
 
+	     stage('Connect to the EKS Cluster') {
+            steps {
+                script {
+                    // Ensure AWS CLI is configured with the right credentials before this step
+                    sh '''
+                    aws eks update-kubeconfig --name dev-cluster --region us-east-1
+		    kubectl get nodes
+                    '''
+                }
+            }
+        }
+
       
 	}
 	}
