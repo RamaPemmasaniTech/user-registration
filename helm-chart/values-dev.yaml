@@ -40,4 +40,4 @@ service:
   type: NodePort
   port: 8080
   annotations:
-#    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
+    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
