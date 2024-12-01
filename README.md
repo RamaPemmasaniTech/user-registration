@@ -51,7 +51,7 @@ service:
 ```bash
 stage('Clone') {
             steps {
-                git branch: 'dev', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/helmchart.git'
+                git branch: 'helm-deploy-on-eks-dockerhub-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
 ```
@@ -78,7 +78,8 @@ stage('Deploy the Application') {
                 script {
                     // Deploy the application with the provided parameters
                     sh '''
-                    helm upgrade --install $RELEASE_NAME . --namespace $namespace --create-namespace --set image.tag=$ImageTag --force --wait --timeout 600s
+                    cd helm-chart
+                    helm upgrade --install ${params.RELEASE_NAME} . --namespace ${params.namespace}  --set image.tag=${params.ImageTag} --force --wait --timeout 600s
                     '''
                 }
             }
@@ -90,8 +91,8 @@ Create a Kubernetes secret for DockerHub credentials:
 ```bash
 kubectl create secret docker-registry dockerhubcred \
   --docker-server=https://index.docker.io/v1/ \
-  --docker-username=<your-username> \
-  --docker-password=<your-password> \
+  --docker-username=mmreddy424 \
+  --docker-password=Docker@2580 \
   --namespace user-management
 ```
 Update `values.yaml` to reference the secret:
@@ -211,7 +212,7 @@ stage('Deploy the Application') {
                 script {
                     // Deploy the application with the provided parameters
                     sh '''
-                    helm upgrade --install $RELEASE_NAME . --namespace $namespace --create-namespace --force --wait --timeout 600s
+                    helm upgrade --install ${params.RELEASE_NAME} . --namespace ${params.namespace}  --force --wait --timeout 600s
                     '''
                 }
             }
