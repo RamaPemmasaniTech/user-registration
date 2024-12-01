@@ -8,7 +8,7 @@ pipeline {
       
 stage('Clone THE REPOSITORY') {
             steps {
-                git branch: ${params.BRANCH_NAME}, credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
+                git branch: "${params.BRANCH_NAME}", credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
     }
