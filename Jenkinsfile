@@ -23,5 +23,18 @@ stage('Clone THE REPOSITORY') {
                 }
             }
         }
+
+        stage('Deploy the Application') {
+            steps {
+                script {
+                    // Deploy the application with the provided parameters
+                    sh '''
+                    cd helm-chart
+                    helm upgrade --install -f values-dev.yaml user-registration . -n user-management
+                    
+                    '''
+                }
+            }
+        }
     }
 }
