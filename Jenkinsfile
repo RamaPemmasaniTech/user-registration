@@ -33,7 +33,7 @@ stage('Clone THE REPOSITORY') {
                     // Deploy the application with the provided parameters
                     sh '''
                     cd helm-chart
-                    helm upgrade --install -f values-dev.yaml $RELEASE_NAME . -n $namespace --set image.tag=$Imagetag
+                    helm upgrade --install -f values-dev.yaml $RELEASE_NAME . -n $namespace --set image.tag=$ImageTag
                     
                     '''
                 }
