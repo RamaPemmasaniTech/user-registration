@@ -3,6 +3,9 @@ pipeline {
     agent any
   parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'helm-deploy-on-eks-dockerhub-jenkinsfile', description: 'Git branch to clone')
+        string(name: 'RELEASE_NAME', defaultValue: '', description: 'RELEASE_NAME')
+		string(name: 'namespace', defaultValue: '', description: 'namespace to deploy')
+		string(name: 'ImageTag', defaultValue: '', description: 'Docker Image Tag to deploy')
   }
     stages {
       
@@ -30,7 +33,7 @@ stage('Clone THE REPOSITORY') {
                     // Deploy the application with the provided parameters
                     sh '''
                     cd helm-chart
-                    helm upgrade --install -f values-dev.yaml user-registration . -n user-management
+                    helm upgrade --install -f values-dev.yaml "${params.RELEASE_NAME}" . -n "${params.namespace}" --set image.tag="${params.Imagetag}"
                     
                     '''
                 }
