@@ -2,7 +2,7 @@
 pipeline {
     agent any
   parameters {
-        string(name: 'BRANCH_NAME', defaultValue: '', description: 'Git branch to clone')
+        string(name: 'BRANCH_NAME', defaultValue: 'helm-deploy-on-eks-dockerhub-jenkinsfile', description: 'Git branch to clone')
   }
     stages {
       
