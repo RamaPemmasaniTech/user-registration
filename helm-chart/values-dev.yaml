@@ -2,6 +2,7 @@
 namespace: user-management
 replicaCount: 2
 imagePullSecrets:
+   - name: dockerhubcred
 
 serviceAccount:
   create: false
