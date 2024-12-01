@@ -51,7 +51,7 @@ service:
 ```bash
 stage('Clone') {
             steps {
-                git branch: 'helm-deploy-on-eks-ecr-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/helmchart.git'
+                git branch: 'helm-deploy-on-eks-ecr-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
 ```
