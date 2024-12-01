@@ -1,1 +1,44 @@
 
+namespace: user-management
+replicaCount: 2
+imagePullSecrets:
+
+serviceAccount:
+  create: false
+
+image:
+  repository: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration
+  tag: "latest"
+  pullPolicy: "IfNotPresent"
+
+application:
+  port: 8080
+  protocol: TCP
+  livenessProbe:
+    path: /actuator/health # /v1/user-registration/health
+    period: 10
+    delay: 30
+    timeout: 15
+    failureThreshold: 10
+  readinessProbe:
+    path: /actuator/health # /v1/user-registration/health
+    period: 30
+    delay: 5
+    timeout: 15
+    failureThreshold: 10
+
+
+resources:
+  limits:
+    cpu: "1"
+    memory: "512Mi"
+  requests:
+    cpu: "500m"
+    memory: "256Mi"
+
+
+service:
+  type: NodePort
+  port: 8080
+  annotations:
+  #  alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
