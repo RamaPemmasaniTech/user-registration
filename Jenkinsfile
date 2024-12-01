@@ -30,6 +30,7 @@ stage('Clone') {
                 script {
                     // Deploy the application with the provided parameters
                     sh '''
+		    cd helm-chart
                     helm upgrade --install $RELEASE_NAME . --namespace $namespace  --set image.tag=$ImageTag --force --wait --timeout 600s
                     '''
                 }
