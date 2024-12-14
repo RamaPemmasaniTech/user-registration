@@ -85,18 +85,14 @@ stage('Build Docker Image') {
 ```
 + ### 6.2 Push Docker Image
 ```xml
-stage('Push Docker Image') {
-            steps {
-                  withCredentials([usernamePassword(credentialsId: 'dockerhub-cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-       
+stage('Push Docker Image to AWS ECR') {
+steps{
                     sh '''
-                   IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
-                    docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-                    docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
+                   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267221649.dkr.ecr.us-east-1.amazonaws.com
+                   ocker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
                     '''
-                }
             } 
-            
+
         }
 ```
 ### Step 7: Verify whether docker image is pushed or not in DockerHub
