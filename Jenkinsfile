@@ -23,8 +23,6 @@ stage('Clone') {
                 script {
                     sh """
                     aws eks update-kubeconfig --name ${EKS_CLUSTER} --region ${AWS_REGION}
-                    aws sts get-caller-identity
-                      kubectl get nodes
                     """
                 }
             }
