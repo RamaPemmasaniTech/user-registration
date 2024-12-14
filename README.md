@@ -11,7 +11,6 @@
 + Docker is installed
 + AWS cli is installed
 + AWS EKS is created
-+ IAM user is created.  User name: dev
 + Github token generate
 + kubectl is installed
 
@@ -119,7 +118,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-registration
-  namespace: sample-ns
+  namespace: user-management
 spec:
   replicas: 2
   selector:
@@ -141,7 +140,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: user-registration
-  namespace: sample-ns
+  namespace: user-management
 spec:
   selector:
     app: user-registration
@@ -240,7 +239,7 @@ spec:
 
 ### Step 9: Access java application through DNS record Name.
 ```
-https://user-registration.techworldwithmurali.in
+https://user-registration-dev.techworldwithmurali.in
 ```
 
 ### Congratulations. You have successfully Deployed the java application in Kubernetes(AWS EKS) through Jenkins Pipeline job.
