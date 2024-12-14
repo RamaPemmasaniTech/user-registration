@@ -52,7 +52,16 @@ stage('Clone') {
                 }
             }
         }
-
+stage('Apply Ingress Manifests') {
+            steps {
+                script {
+                    sh """
+                    cd k8s
+                    kubectl apply -f user-management-ingress.yaml
+                    """
+                }
+            }
+        }
 
      
    }
