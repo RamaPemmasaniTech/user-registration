@@ -218,7 +218,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-    - host: user-registration.techworldwithmurali.in
+    - host: user-registration-dev.techworldwithmurali.in
       http:
         paths:
           - path: /
@@ -230,10 +230,13 @@ spec:
                   number: 8080
 
 ```
+### Step 7:  Apply the ingress
+```
+kubectl apply -f user-management-ingress.yaml
+```
+### Step 8: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 7: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
-
-### Step 8: Access java application through DNS record Name.
+### Step 9: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
