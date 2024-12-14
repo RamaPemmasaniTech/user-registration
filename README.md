@@ -62,7 +62,7 @@ WORKDIR /app
 COPY target/*.jar /app/user-registration.jar
 
 # Expose the application's port (update if your application uses a specific port)
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
