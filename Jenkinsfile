@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: '', description: 'Git branch to clone')
+        string(name: 'BRANCH_NAME', defaultValue: 'deploy-to-eks-ecr-jenkinsfile', description: 'Git branch to clone')
 
     }
 
