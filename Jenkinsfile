@@ -41,6 +41,18 @@ stage('Clone') {
             }
         }
 
+       stage('Apply Kubernetes Manifests') {
+            steps {
+                script {
+                    sh """
+                    cd k8s
+                    kubectl apply -f deployment.yaml
+                    kubectl apply -f service.yaml
+                    """
+                }
+            }
+        }
+
 
      
    }
