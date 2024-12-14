@@ -37,7 +37,7 @@ Branch : deploy-to-eks-ecr-jenkinsfile
 ```xml
 stage('Clone the repository'){
         steps{
-          git branch: 'deploy-to-eks-ecr-jenkinsfile', credentialsId: 'github-credentials', url: 'https://github.com/techworldwithmurali/user-registration.git'
+          git branch: 'deploy-to-eks-ecr-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
           
         } 
       }
@@ -75,7 +75,7 @@ stage('Build Docker Image') {
                 sh '''
                IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
                docker build . --tag user-registration:$IMAGE_TAG
-               docker tag user-registration:$IMAGE_TAG mmreddy424/user-registration:$IMAGE_TAG
+               docker tag user-registration:$IMAGE_TAG 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
                 
                 '''
                 
@@ -92,7 +92,7 @@ stage('Push Docker Image') {
                     sh '''
                    IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
                     docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-                    docker push mmreddy424/user-registration:$IMAGE_TAG
+                    docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
                     '''
                 }
             } 
@@ -156,7 +156,7 @@ spec:
 ```xml
 stage('Clone') {
             steps {
-                git branch: 'deploy-to-eks-ecr-jenkinsfile', credentialsId: 'github-credentials', url: 'https://github.com/techworldwithmurali/user-registration.git'
+                git branch: 'deploy-to-eks-ecr-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
 ```
