@@ -62,7 +62,16 @@ stage('Apply Ingress Manifests') {
                 }
             }
         }
-
+stage('delete kubenetes Manifests') {
+            steps {
+                script {
+                    sh """
+                    cd k8s
+                    kubectl delete -f .
+                    """
+                }
+            }
+        }
      
    }
 }
