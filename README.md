@@ -95,7 +95,7 @@ steps{
 
         }
 ```
-### Step 7: Verify whether docker image is pushed or not in DockerHub
+### Step 7: Verify whether docker image is pushed or not in AWS ECR
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -196,11 +196,11 @@ stage('Apply Kubernetes Manifests') {
             }
         }
 ```
-### Step 6: Access java application through NodePort.
+### Step 5: Access java application through NodePort.
 ```xml
 http://node-IP:port
 ```
-### Step 7: Deploy Ingress Resource for This Application
+### Step 6: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -231,12 +231,12 @@ spec:
 
 ```
 
-### Step 8: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 7: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 9: Access java application through DNS record Name.
+### Step 8: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
 
-### Congratulations. You have successfully Deployed the java application in Kubernetes(AWS EKS) through Jenkins Pipeline job.
+### Congratulations. You have successfully Deployed the user-registration java application in Kubernetes(AWS EKS) through Jenkins Pipeline job.
 
