@@ -189,7 +189,7 @@ stage('Apply Kubernetes Manifests') {
             steps {
                 script {
                     sh """
-                    kubectl apply -f ${DEPLOYMENT_FILE}
+                    cd k8s
                     kubectl apply -f .
                     """
                 }
