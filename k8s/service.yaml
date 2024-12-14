@@ -4,7 +4,7 @@ metadata:
   name: user-registration
   namespace: user-management
   annotations:
-     alb.ingress.kubernetes.io/healthcheck-path: /user-registration
+     alb.ingress.kubernetes.io/healthcheck-path: /
 spec:
   selector:
     app: user-registration
