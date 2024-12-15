@@ -9,9 +9,11 @@
 
 ### Prerequisites:
 + Git is installed
++ Java 17 is installed
 + Maven is installed
 + Docker is installed
 + AWS ECR repository is created
++ AWS RDS MYSQL is created
 
 ### Step 1: Clone the repository
   
