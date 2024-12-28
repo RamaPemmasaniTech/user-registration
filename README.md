@@ -48,7 +48,7 @@ WORKDIR /app
 COPY target/*.jar /app/user-registration.jar
 
 # Expose the application's port (update if your application uses a specific port)
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
@@ -57,16 +57,16 @@ CMD ["java", "-jar", "/app/user-registration.jar"]
 ### Step 7: Build and tag the Docker image
 ```xml
 docker build . --tag user-registration:latest
-docker tag user-registration:latest 533267221649.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+docker tag user-registration:latest 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
 ### Step 8: Configure the AWS credenatils in Jenkins Server or attach the IAM role to the jenkins server 
 ### Step 9: login to AWS ECR
 ```xml
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267221649.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
 ```
 ### Step 10: Push to AWS ECR
 ```xml
-docker push 533267221649.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
 ### Step 11: Verify whether docker image is pushed or not in AWS ECR
 
