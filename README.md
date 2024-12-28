@@ -61,7 +61,7 @@ WORKDIR /app
 COPY target/*.jar /app/user-registration.jar
 
 # Expose the application's port (update if your application uses a specific port)
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
@@ -73,7 +73,7 @@ stage('Build Docker Image') {
             steps {
                 sh '''
               docker build . --tag user-registration:latest
-              docker tag user-registration:latest 533267221649.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+              docker tag user-registration:latest 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
                 
                 '''
                 
@@ -87,8 +87,8 @@ stage('Build Docker Image') {
 stage('Push Docker Image to AWS ECR') {
 steps{
                     sh '''
-                   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 533267221649.dkr.ecr.us-east-1.amazonaws.com
-                   docker push 533267221649.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+                   aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
+                   docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
                     '''
             } 
 
