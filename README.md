@@ -22,7 +22,7 @@ Job Name: build-freestyle
 ```
 ### Step 3: Configure the git repository
 ```xml
-GitHub Url: https://github.com/techworldwithmurali/microservice-one.git
+GitHub Url: https://github.com/techworldwithmurali/user-registration.git
 Branch : bbuild-freestyle
 ```
 ### Step 4: Build the application
