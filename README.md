@@ -8,8 +8,12 @@
 ## Jenkins Pipeline - Dockerizing and Pushing to DockerHub.
 
 ### Prerequisites:
-+ Jenkins is installed
-+  Github token generate
++ Git is installed
++ Java 17 Installed 
++ Maven is installed
++ AWS RDS MYSQL is created
++ Docker is installed
++ DockerHub repo is created
 
 ### Step 1: Install and configure the jenkins plugins
  + git
