@@ -88,13 +88,11 @@ stage('Build Docker Image') {
 ```xml
 stage('Push Docker Image') {
             steps {
-                  withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USERNAME')]) {
        
                     sh '''
-                    docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-                        docker push mmreddy424/user-registration:latest
+                   docker login -u mmreddy424 -p Docker@2580
+               docker  push mmreddy424/user-registration:latest
                     '''
-                }
             } 
             
         }
