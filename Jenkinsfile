@@ -21,8 +21,9 @@ pipeline {
    stage('Build Docker Image') {
             steps {
                 sh '''
-               docker build . --tag user-registration:$GIT_COMMIT
-               docker tag user-registration:$GIT_COMMIT mmreddy424/user-registration:$GIT_COMMIT
+                IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
+               docker build . --tag user-registration:$IMAGE_TAG
+               docker tag user-registration:$IMAGE_TAG mmreddy424/user-registration:$IMAGE_TAG
                 
                 '''
                 
@@ -32,8 +33,9 @@ pipeline {
         stage('Push the docker image to dockerhub') {
             steps {
                 sh '''
+                  IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
                docker login -u mmreddy424 -p Docker@2580
-               docker  push mmreddy424/user-registration:$GIT_COMMIT
+               docker  push mmreddy424/user-registration:$IMAGE_TAG
                 
                 '''
                 
