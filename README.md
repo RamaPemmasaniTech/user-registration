@@ -23,11 +23,11 @@ Job Name: build-freestyle
 ### Step 3: Configure the git repository
 ```xml
 GitHub Url: https://github.com/techworldwithmurali/user-registration.git
-Branch : bbuild-freestyle
+Branch : build-freestyle
 ```
 ### Step 4: Build the application
 ```sh
-mvn clean package
+clean package
 ```
 ### Step 5: Verify whether artifact(jar) is generated or not
 #### Congratulations. You have successfully generated the jar file using Jenkins Freestyle job.
