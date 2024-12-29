@@ -41,7 +41,7 @@ Branch : pushing-docker-image-to-dockerhub-jenkinsfile
 ```xml
 stage('Clone') {
             steps {
-                git branch: 'pushing-docker-image-to-dockerhub-jenkinsfile', credentialsId: 'github-credentials', url: 'https://github.com/techworldwithmurali/user-registration.git'
+                git branch: 'pushing-docker-image-to-dockerhub-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
 ```
