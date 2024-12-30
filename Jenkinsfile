@@ -4,6 +4,11 @@ pipeline {
   maven 'Maven-3.9.8'
 }
 
+    parameters {
+	     string(name: 'BRANCH', defaultValue: '', description: 'Branch to build')
+    }
+
+    
  environment {
         // Define IMAGE_TAG globally using the GIT_COMMIT environment variable
         IMAGE_TAG = "${GIT_COMMIT.substring(0, 6)}"
@@ -11,7 +16,7 @@ pipeline {
     stages {
        stage('Clone the repo') {
             steps {
-                git branch: 'pushing-docker-image-to-dockerhub-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
+                git branch: "${params.BRANCH}", credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
             }
         }
         
