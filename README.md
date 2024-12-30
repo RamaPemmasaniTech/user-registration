@@ -1,23 +1,3 @@
-+ <b>Author: Moole Muralidhara Reddy</b></br>
-+ <b>Email:</b> techworldwithmurali@gmail.com</br>
-+ <b>Website:</b> https://techworldwithmurali.com </br>
-+ <b>Youtube Channel:</b>Tech World With Murali</br>
-+ <b>Description:</b> Below are the steps outlined for manually Deploy to EKS fetching image from AWS ECR.</br>
-
-## Manually - Deploy to EKS fetching image from AWS ECR.
-
-### Prerequisites:
-+ Git is installed
-+ Maven is installed
-+ Docker is installed
-+ DockerHub repository is created
-+ AWS EKS is created
-+ IAM User is created
-+ kubectl is installed
-+ aws cli is installed
-+ Deployed the AWS ALB Ingress Controller
-+ Deployed ExternalDNS
-
 # user-registration-page
 + <b>Author: Moole Muralidhara Reddy</b></br>
 + <b>Email:</b> techworldwithmurali@gmail.com</br>
