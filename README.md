@@ -226,17 +226,7 @@ imagePullSecrets:
 ```xml
 http://node-IP:port
 ```
-
-## Jenkins Job = dev-ingress
-
-### Step 1: Attach the IAM role to the Jenkins server
-### Step 2: Configure the git repository
-```xml
-GitHub Url: https://github.com/techworldwithmurali/ingress.git
-Branch : deploy-to-eks-dockerhub-jenkinsfile
-```
-
-### Step 3: Deploy Ingress Resource for This Application
+### Step 7: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -266,48 +256,15 @@ spec:
                   number: 8080
 
 ```
-### Step 4: Write the Jenkinsfile
-  + ### Step 4.1: Clone the repository 
-```xml
-stage('Clone the repository') {
-            steps {
-                git branch: 'deploy-to-eks-dockerhub-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/ingress.git'
-            }
-        }
+### Step 7:  Apply the ingress
 ```
-
-+ ### Step 4.2: Set Up AWS EKS Config
-```xml
-stage('Set Up AWS EKS Config') {
-            steps {
-                script {
-                    sh """
-                    aws eks update-kubeconfig --name ${EKS_CLUSTER} --region ${AWS_REGION}
-                    """
-                }
-            }
-        }
+kubectl apply -f user-management-ingress.yaml
 ```
+### Step 8: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 5:  Apply the ingress
-```xml
-stage('Apply the ingress') {
-            steps {
-                script {
-                    sh """
-                    kubectl apply -f user-management-ingress.yaml
-                    """
-                }
-            }
-        }
-```
-
-### Step 6: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
-
-### Step 7: Access java application through DNS record Name.
+### Step 9: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
 
 ### Congratulations. You have successfully Deployed the user-registration java application in Kubernetes(AWS EKS) through Jenkins Pipeline job.
-
