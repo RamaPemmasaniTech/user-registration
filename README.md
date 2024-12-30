@@ -15,7 +15,7 @@
 + Maven is installed
 + AWS RDS MYSQL is created
 + Docker is installed
-+ DockerHub repo is created
++ AWS ECR repo is created
 + Github token generate
 
 ### Step 1: Install and configure the jenkins plugins
