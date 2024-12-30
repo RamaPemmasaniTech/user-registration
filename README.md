@@ -2,9 +2,9 @@
 + <b>Email:</b> techworldwithmurali@gmail.com</br>
 + <b>Website:</b> https://techworldwithmurali.com </br>
 + <b>Youtube Channel:</b>Tech World With Murali</br>
-+ <b>Description:</b> Below are the steps outlined for manually Deploy to EKS fetching image from DockerHub.</br>
++ <b>Description:</b> Below are the steps outlined for manually Deploy to EKS fetching image from AWS ECR.</br>
 
-## Manually - Deploy to EKS fetching image from DockerHub.
+## Manually - Deploy to EKS fetching image from AWS ECR.
 
 ### Prerequisites:
 + Git is installed
@@ -18,18 +18,38 @@
 + Deployed the AWS ALB Ingress Controller
 + Deployed ExternalDNS
 
+# user-registration-page
++ <b>Author: Moole Muralidhara Reddy</b></br>
++ <b>Email:</b> techworldwithmurali@gmail.com</br>
++ <b>Website:</b> https://techworldwithmurali.com </br>
++ <b>Youtube Channel:</b>Tech World With Murali</br>
++ <b>Description:</b> Below are the steps outlined for manually Dockerizing and Pushing to AWS ECR.</br>
+
+## Manually - Dockerizing and Pushing to AWS ECR
+
+### Prerequisites:
++ Git is installed
++ Maven is installed
++ Docker is installed
++ DockerHub repository is created
++ AWS EKS is created
++ IAM User is created
++ kubectl is installed
++ aws cli is installed
++ Deployed the AWS ALB Ingress Controller
++ Deployed ExternalDNS
 
 ### Step 1: Clone the repository
   
 ```xml
   github url: https://github.com/techworldwithmurali/user-registration.git
-  Branch Name: deploy-to-eks-dockerhub
+  Branch Name: deploy-to-eks-ecr
 ```
 ### Step 2: build the code
 ```xml
 mvn package
 ```
-### Step 3: Create the repository in DockerHub
+### Step 3: Create the repository in AWS ECR
 ```xml
 Repository Name: user-registration
 ```
@@ -49,22 +69,23 @@ EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
-
 ```
 ### Step 5: Build and tag the Docker image
 ```xml
 docker build . --tag user-registration:latest
-docker tag user-registration:latest mmreddy424/user-registration:latest
+
+docker tag user-registration:latest 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
-### Step 6: Login to DockerHub in local
+### Step 6: Login to AWS ECR in local
 ```xml
-docker login -u your-username -p your-password
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
 ```
+
 ### Step 7: Push the docker image to DockerHub
 ```xml
-docker push mmreddy424/user-registration:latest
+docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
-### Step 8: Verify whether docker image is pushed or not in DockerHub
+### Step 8: Verify whether docker image is pushed or not in AWS ECR
 
 ### Step 9 : Write the Kubernetes Deployment and Service manifest files.
 ##### deployment.yaml
@@ -88,7 +109,7 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: mmreddy424/user-registration:latest
+        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
 ##### service.yaml
 ```xml
@@ -125,21 +146,8 @@ kubectl apply -f .
 ```
 kubectl get pods -n user-management
 ```
-### Step 15: Create a secret file for Dockerhub credenatils
-```xml
-kubectl create secret docker-registry dockerhubcred \
---docker-server=https://index.docker.io/v1/ \
---docker-username=mmreddy424 \
---docker-password=Docker@2580 \
---docker-email=techworldwithmurali@gmail.com \
---namespace user-management
-```
-```xml
-  imagePullSecrets:
-  - name: dockerhubcred
 
-```
-### Step 16: Deploy Ingress Resource for This Application
+### Step 15: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -168,13 +176,13 @@ spec:
                 port:
                   number: 8080
 ```
-### Step 17: Apply the ingress
+### Step 16: Apply the ingress
 
 kubectl apply -f user-management-ingress.yaml
 
-### Step 18: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 17: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 19: Access java application through DNS record Name.
+### Step 18: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
