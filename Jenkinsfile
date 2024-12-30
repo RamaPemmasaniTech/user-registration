@@ -32,14 +32,17 @@ pipeline {
      
         stage('Push the docker image to dockerhub') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-cred', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+
                 sh '''
                   IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
-               docker login -u mmreddy424 -p Docker@2580
+               docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
                docker  push mmreddy424/user-registration:$IMAGE_TAG
                 
                 '''
                 
             }
+                }
         }   
         
         
