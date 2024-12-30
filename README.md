@@ -10,8 +10,12 @@
 
 ### Prerequisites:
 + Jenkins is installed
++ Git is installed
++ Java 17 Installed 
++ Maven is installed
++ AWS RDS MYSQL is created
 + Docker is installed
-+ AWS cli is installed
++ DockerHub repo is created
 + Github token generate
 
 ### Step 1: Install and configure the jenkins plugins
