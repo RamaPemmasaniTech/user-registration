@@ -174,7 +174,7 @@ kubectl apply -f user-management-ingress.yaml
 
 ### Step 18: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 18: Access java application through DNS record Name.
+### Step 19: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
