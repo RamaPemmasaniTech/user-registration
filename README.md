@@ -20,7 +20,7 @@
  + git
  + maven integration
 
-### Step 2: Create the AWS ECR repository
+### Step 2: Create the Docker repository in DockerHub
 ```xml
 Name: user-registration
 ```
