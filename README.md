@@ -27,7 +27,7 @@
 ```xml
 mvn package
 ```
-### Step 3: Create the repository in AWS ECR
+### Step 3: Create the repository in DockerHub
 ```xml
 Repository Name: user-registration
 ```
@@ -47,24 +47,22 @@ EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
+
 ```
 ### Step 5: Build and tag the Docker image
 ```xml
 docker build . --tag user-registration:latest
-
-docker tag user-registration:latest 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+docker tag user-registration:latest mmreddy424/user-registration:latest
 ```
-### Step 6: Login to AWS ECR in local
+### Step 6: Login to DockerHub in local
 ```xml
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
+docker login -u your-username -p your-password
 ```
-
 ### Step 7: Push the docker image to DockerHub
 ```xml
-docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+docker push mmreddy424/user-registration:latest
 ```
-### Step 8: Verify whether docker image is pushed or not in AWS ECR
-
+### Step 8: Verify whether docker image is pushed or not in DockerHub
 ------------------------------------------------------------------------------------------------------
 ## Jenkins Job 2: deploy-dev
 ### Step 1: Attach the IAM role to the Jenkins server
