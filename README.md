@@ -21,13 +21,13 @@
   
 ```xml
   github url: https://github.com/techworldwithmurali/user-registration.git
-  Branch Name: deploy-to-eks-dockerhub-freestyle
+  Branch Name: deploy-to-eks-ecr-freestyle
 ```
 ### Step 2: build the code
 ```xml
 mvn package
 ```
-### Step 3: Create the repository in DockerHub
+### Step 3: Create the repository in AWS ECR
 ```xml
 Repository Name: user-registration
 ```
@@ -47,22 +47,23 @@ EXPOSE 8080
 
 # Command to run the application
 CMD ["java", "-jar", "/app/user-registration.jar"]
-
 ```
 ### Step 5: Build and tag the Docker image
 ```xml
 docker build . --tag user-registration:latest
-docker tag user-registration:latest mmreddy424/user-registration:latest
+
+docker tag user-registration:latest 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
-### Step 6: Login to DockerHub in local
+### Step 6: Login to AWS ECR in local
 ```xml
-docker login -u your-username -p your-password
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
 ```
+
 ### Step 7: Push the docker image to DockerHub
 ```xml
-docker push mmreddy424/user-registration:latest
+docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
-### Step 8: Verify whether docker image is pushed or not in DockerHub
+### Step 8: Verify whether docker image is pushed or not in AWS ECR
 
 ------------------------------------------------------------------------------------------------------
 ## Jenkins Job 2: deploy-dev
@@ -70,12 +71,13 @@ docker push mmreddy424/user-registration:latest
 ### Step 2: Configure the git repository
 ```xml
 GitHub Url: https://github.com/techworldwithmurali/user-registration.git
-Branch : deploy-to-eks-dockerhub-freestyle
+Branch : deploy-to-eks-ecr-freestyle
 ```
 
 ### Step 3: Write the Kubernetes Deployment and Service manifest files.
 ##### deployment.yaml
 ```xml
+
 
 apiVersion: apps/v1
 kind: Deployment
@@ -94,10 +96,11 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: mmreddy424/user-registration:latest
+        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
 ##### service.yaml
 ```xml
+
 
 apiVersion: v1
 kind: Service
@@ -112,7 +115,6 @@ spec:
     port: 8080
     targetPort: 8080
   type: NodePort
-
 ```
 ### Step 4: Connect to the AWS EKS Cluster
 ```xml
@@ -129,26 +131,12 @@ kubectl apply -f .
 ```xml
 kubectl get pods -n user-management
 ```
-### Step 7: Create a secret file for Dockerhub credenatils
-```xml
-kubectl create secret docker-registry dockerhubcred \
---docker-server=https://index.docker.io/v1/ \
---docker-username=mmreddy424 \
---docker-password=Docker@2580 \
---docker-email=techworldwithmurali@gmail.com \
---namespace sample-ns --dry-run=client -o yaml
-
-```
-```xml
-imagePullSecrets:
-- name: dockerhubcred
-```
-### Step 8: Access java application through NodePort.
+### Step 7: Access java application through NodePort.
 ```xml
 http://Node-IP:port
 ```
 
-### Step 9: Deploy Ingress Resource for This Application
+### Step 8: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -178,9 +166,9 @@ spec:
                   number: 8080
 
 ```
-### Step 10: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 9: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 11: Access java application through DNS record Name.
+### Step 10: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
