@@ -21,7 +21,7 @@
   
 ```xml
   github url: https://github.com/techworldwithmurali/user-registration.git
-  Branch Name: deploy-to-eks-ecr-freestyle
+  Branch Name: deploy-to-eks-dockerhub-freestyle
 ```
 ### Step 2: build the code
 ```xml
@@ -71,7 +71,7 @@ docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:lates
 ### Step 2: Configure the git repository
 ```xml
 GitHub Url: https://github.com/techworldwithmurali/user-registration.git
-Branch : deploy-to-eks-ecr-freestyle
+Branch : deploy-to-eks-dockerhub-freestyle
 ```
 
 ### Step 3: Write the Kubernetes Deployment and Service manifest files.
