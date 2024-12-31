@@ -77,8 +77,6 @@ Branch : deploy-to-eks-dockerhub-freestyle
 ### Step 3: Write the Kubernetes Deployment and Service manifest files.
 ##### deployment.yaml
 ```xml
-
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -96,12 +94,10 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+        image: mmreddy424/user-registration:latest
 ```
 ##### service.yaml
 ```xml
-
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -123,7 +119,7 @@ kubectl get nodes
 ```
 ### Step 5: Apply the Kubernetes manifest files
 ```xml
-cd kubernetes
+cd k8s
 kubectl apply -f .
 
 ```
@@ -135,8 +131,20 @@ kubectl get pods -n user-management
 ```xml
 http://Node-IP:port
 ```
-
-### Step 8: Deploy Ingress Resource for This Application
+----------
+## Jenkins Job 3: ingress-dev
+### Step 1: Attach the IAM role to the Jenkins server
+### Step 2: Configure the git repository
+```xml
+GitHub Url: https://github.com/techworldwithmurali/ingress.git
+Branch : deploy-to-eks-dockerhub-freestyle
+```
+### Step 3: Connect to the AWS EKS Cluster
+```xml
+aws eks update-kubeconfig --name dev-cluster --region us-east-1
+kubectl get nodes
+```
+### Step 4: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -166,9 +174,14 @@ spec:
                   number: 8080
 
 ```
-### Step 9: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 5: Apply the ingress
 
-### Step 10: Access java application through DNS record Name.
+```
+kubectl apply -f user-management-ingress.yaml
+```
+### Step 6: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+
+### Step 7: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
