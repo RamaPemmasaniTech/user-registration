@@ -170,8 +170,9 @@ spec:
 ```
 ### Step 17: Apply the ingress
 
+```
 kubectl apply -f user-management-ingress.yaml
-
+```
 ### Step 18: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
 ### Step 19: Access java application through DNS record Name.
