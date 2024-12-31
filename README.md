@@ -2,9 +2,9 @@
 + <b>Email:</b> techworldwithmurali@gmail.com</br>
 + <b>Website:</b> https://techworldwithmurali.com </br>
 + <b>Youtube Channel:</b> Tech World With Murali</br>
-+ <b>Description:</b> Below are the steps outlined for Jenkins Freestyle - Deploy to EKS fetching image from DockerHub.</br>
++ <b>Description:</b> Below are the steps outlined for Jenkins Freestyle - Deploy to EKS fetching image from AWS ECR.</br>
 
-## Jenkins Freestyle - Deploy to EKS fetching image from DockerHub.
+## Jenkins Freestyle - Deploy to EKS fetching image from AWS ECR.
 
 ### Prerequisites:
 +  Jenkins is installed
@@ -71,7 +71,7 @@ docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:lates
 ### Step 2: Configure the git repository
 ```xml
 GitHub Url: https://github.com/techworldwithmurali/user-registration.git
-Branch : deploy-to-eks-dockerhub-freestyle
+Branch : deploy-to-eks-ecr-freestyle
 ```
 
 ### Step 3: Write the Kubernetes Deployment and Service manifest files.
@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: mmreddy424/user-registration:latest
+        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
 ```
 ##### service.yaml
 ```xml
@@ -122,7 +122,7 @@ kubectl get nodes
 ```
 ### Step 5: Apply the Kubernetes manifest files
 ```xml
-cd kubernetes
+cd k8s
 kubectl apply -f .
 
 ```
@@ -130,26 +130,22 @@ kubectl apply -f .
 ```xml
 kubectl get pods -n user-management
 ```
-### Step 7: Create a secret file for Dockerhub credenatils
-```xml
-kubectl create secret docker-registry dockerhubcred \
---docker-server=https://index.docker.io/v1/ \
---docker-username=mmreddy424 \
---docker-password=Docker@2580 \
---docker-email=techworldwithmurali@gmail.com \
---namespace sample-ns --dry-run=client -o yaml
 
-```
-```xml
-imagePullSecrets:
-- name: dockerhubcred
-```
-### Step 8: Access java application through NodePort.
+### Step 7: Access java application through NodePort.
 ```xml
 http://Node-IP:port
 ```
 
-### Step 9: Deploy Ingress Resource for This Application
+------
+## Jenkins Job 3: ingress-dev
+### Step 1: Attach the IAM role to the Jenkins server
+### Step 2: Configure the git repository
+```xml
+GitHub Url: https://github.com/techworldwithmurali/ingress.git
+Branch : deploy-to-eks-ecr-freestyle
+```
+
+### Step 3: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -179,9 +175,19 @@ spec:
                   number: 8080
 
 ```
-### Step 10: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 4: Connect to the AWS EKS Cluster
+```xml
+aws eks update-kubeconfig --name dev-cluster --region us-east-1
+kubectl get nodes
+```
+### Step 5: Apply the ingress
 
-### Step 11: Access java application through DNS record Name.
+```
+kubectl apply -f user-management-ingress.yaml
+```
+### Step 6: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+
+### Step 7: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
