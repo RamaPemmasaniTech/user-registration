@@ -137,12 +137,7 @@ http://Node-IP:port
 GitHub Url: https://github.com/techworldwithmurali/ingress.git
 Branch : deploy-to-eks-dockerhub-freestyle
 ```
-### Step 3: Connect to the AWS EKS Cluster
-```xml
-aws eks update-kubeconfig --name dev-cluster --region us-east-1
-kubectl get nodes
-```
-### Step 4: Deploy Ingress Resource for This Application
+### Step 3: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -171,6 +166,11 @@ spec:
                 port:
                   number: 8080
 
+```
+### Step 4: Connect to the AWS EKS Cluster
+```xml
+aws eks update-kubeconfig --name dev-cluster --region us-east-1
+kubectl get nodes
 ```
 ### Step 5: Apply the ingress
 
