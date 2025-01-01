@@ -11,7 +11,7 @@
 + Git is installed
 + Maven is installed
 + Docker is installed
-+ DockerHub repository is created
++ AWS ECR repository is created
 + AWS EKS is created
 + IAM User is created
 + kubectl is installed
