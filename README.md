@@ -126,8 +126,11 @@ kubectl apply -f .
 ```
 kubectl get pods -n user-management
 ```
-
-### Step 15: Deploy Ingress Resource for This Application
+### Step 15: Access java application through NodePort.
+```xml
+http://Node-IP:port
+```
+### Step 16: Deploy Ingress Resource for This Application
 ```xml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -156,13 +159,13 @@ spec:
                 port:
                   number: 8080
 ```
-### Step 16: Apply the ingress
+### Step 17: Apply the ingress
 
 kubectl apply -f user-management-ingress.yaml
 
-### Step 17: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
+### Step 18: Check Whether Load Balancer, Rules, and DNS Records Are Created in Route 53
 
-### Step 18: Access java application through DNS record Name.
+### Step 19: Access java application through DNS record Name.
 ```
 https://user-registration-dev.techworldwithmurali.in
 ```
