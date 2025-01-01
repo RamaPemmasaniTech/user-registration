@@ -7,7 +7,10 @@ pipeline {
     parameters {
 	     string(name: 'BRANCH', defaultValue: 'pushing-docker-image-to-ecr-jenkinsfile', description: 'Branch to build')
     }
-
+ environment {
+        // Define IMAGE_TAG globally using the GIT_COMMIT environment variable
+        IMAGE_TAG = "${GIT_COMMIT.substring(0, 6)}"
+    }
 
     stages {
        stage('Clone the repository') {
@@ -26,7 +29,6 @@ pipeline {
       stage('Build Docker Image') {
             steps {
                 sh '''
-		IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
               docker build . --tag user-registration:$IMAGE_TAG
               docker tag user-registration:$IMAGE_TAG 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
                 
@@ -39,7 +41,6 @@ pipeline {
         stage('Push Docker Image to AWS ECR') {
 steps{
                     sh '''
-		    IMAGE_TAG=$(echo $GIT_COMMIT | cut -c1-6)
                    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 266735810449.dkr.ecr.us-east-1.amazonaws.com
                    docker push 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:$IMAGE_TAG
                     '''
