@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: user-registration
   namespace: user-management
+  annotations:
+    alb.ingress.kubernetes.io/healthcheck-path: /actuator/health
 spec:
   selector:
     app: user-registration
