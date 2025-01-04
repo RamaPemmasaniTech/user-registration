@@ -125,7 +125,21 @@ kubectl apply -f .
 ```xml
 kubectl get pods -n user-management
 ```
-### Step 7: Access java application through NodePort.
+### Step 7: Create a secret file for Dockerhub credenatils
+```xml
+kubectl create secret docker-registry dockerhubcred \
+--docker-server=https://index.docker.io/v1/ \
+--docker-username=mmreddy424 \
+--docker-password=Docker@2580 \
+--docker-email=techworldwithmurali@gmail.com \
+--namespace user-management
+```
+```xml
+  imagePullSecrets:
+  - name: dockerhubcred
+
+```
+### Step 8: Access java application through NodePort.
 ```xml
 http://Node-IP:port
 ```
