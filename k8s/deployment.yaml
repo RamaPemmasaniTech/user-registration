@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: mmreddy424/user-registration:latest
+        image: mmreddy424/user-registration:__TAG__
