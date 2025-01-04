@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: mmreddy424/user-registration:__TAG__
+        image: mmreddy424/user-registration:latest
       imagePullSecrets:
       - name: dockerhubcred
