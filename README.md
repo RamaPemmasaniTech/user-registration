@@ -21,7 +21,7 @@
   
 ```xml
   github url: https://github.com/techworldwithmurali/user-registration.git
-  Branch Name: deploy-to-eks-ecr
+  Branch Name: deploy-to-eks-ecr-freestyle
 ```
 ### Step 2: build the code
 ```xml
