@@ -206,7 +206,7 @@ stage('Apply Kubernetes Manifests') {
 --docker-username=mmreddy424 \
 --docker-password=Docker@2580 \
 --docker-email=techworldwithmurali@gmail.com \
---namespace sample-ns --dry-run=client -o yaml
+--namespace user-management --dry-run=client -o yaml
 ```
 ###### Output:
 ```xml
@@ -216,7 +216,7 @@ data:
 kind: Secret
 metadata:
   name: dockerhubcred
-  namespace: sample-ns
+  namespace: user-management
 type: kubernetes.io/dockerconfigjson
 
 ```
