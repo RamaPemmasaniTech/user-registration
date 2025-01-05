@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
       - name: user-registration
-        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:latest
+        image: 266735810449.dkr.ecr.us-east-1.amazonaws.com/user-registration:__TAG__
