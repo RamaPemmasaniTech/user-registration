@@ -2,11 +2,13 @@
     agent any
 parameters {
         string(name: 'BRANCH', defaultValue: 'deploy-to-eks-dockerhub-jenkinsfile', description: 'Git branch to clone')
+	string(name: 'IMAGE_TAG', defaultValue: '', description: 'Docker Image Tag to deploy')
 
     }
 	   environment {
         AWS_REGION = 'us-east-1'
         EKS_CLUSTER = 'dev-cluster'
+	DEPLOYMENT_FILE = 'k8s/deployment.yaml'
 	   }
 	  
     stages {
@@ -29,7 +31,17 @@ stage('Clone') {
             }
         }
 
-	    
+
+	    stage('Update Deployment File') {
+            steps {
+                script {
+                    sh """
+                    sed -i 's|__TAG__|${params.IMAGE_TAG}|g' ${DEPLOYMENT_FILE}
+                    cat ${DEPLOYMENT_FILE}
+                    """
+                }
+            }
+        }
 
 
 
