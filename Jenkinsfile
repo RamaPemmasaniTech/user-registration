@@ -21,6 +21,15 @@ parameters {
                 sh 'mvn clean package'
             }
         }
+
+	    stage('Static code analysis') {
+            steps {
+        withSonarQubeEnv('sonarqube-token') {
+                    sh  "mvn sonar:sonar"
+                }
+                }
+                
+            }
         
         
     }
