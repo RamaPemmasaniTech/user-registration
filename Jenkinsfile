@@ -25,7 +25,7 @@ parameters {
 	    stage('Static code analysis') {
             steps {
         withSonarQubeEnv('sonarqube-token') {
-                    sh  "mvn sonar:sonar -Dproject.settings=sonar.properties"
+                    sh  "mvn sonar:sonar"
                 }
                 }
                 
