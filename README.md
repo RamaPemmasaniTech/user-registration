@@ -2,39 +2,38 @@
 + <b>Email:</b> techworldwithmurali@gmail.com</br>
 + <b>Website:</b> https://techworldwithmurali.com </br>
 + <b>Youtube Channel:</b> Tech World With Murali</br>
-+ <b>Description:</b> Below are the steps outlined for the Jenkins Pipeline to build the application and generate the jar file</br>
++ <b>Description:</b> Below are the steps outlined for Jenkins Pipeline - Static Code Analysis using SonarQube</br>
 
-## Jenkins Pipeline - Build the application
+## Jenkins Pipeline - Static Code Analysis using SonarQube
 
 ### Prerequisites:
-+ Git is installed
-+ Java 17 Installed 
-+ Maven is installed
-+ AWS RDS MYSQL is created
+  + Jenkins is installed
+  + SonarQube is installed
+  + Github token generate
 
 ### Step 1: Install and configure the jenkins plugins
   + git
   + maven integration
+  + SonarQube Scanner plugin
   
-### Step 2: Create the Jenkins Pipeline job under user-management folder
+### Step 2: Create the Jenkins Pipeline job
 ```xml
-Job Name: build-pipeline
+Job Name: static-code-analysis-jenkins-piepline
 ```
 ### Step 3: Configure the git repository
 ```xml
-GitHub Url: https://github.com/techworldwithmurali/user-registration.git
-Branch : build-jenkinsfile
+  Github url: https://github.com/techworldwithmurali/user-registration.git
+  Branch : static-code-analysis-jenkinsfile
 ```
 ### Step 4: Write the Jenkinsfile
   + ### Step 4.1: Clone the repository 
 ```xml
-stage('Clone the Repository ') {
-            steps {
-               git branch: 'build-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
-               
-               
-            }
-        }
+stage('Clone the repository'){
+        steps{
+          git branch: 'static-code-analysis-jenkinsfile', credentialsId: 'github-cred', url: 'https://github.com/techworldwithmurali/user-registration.git'
+          
+        } 
+      }
 ```
   + ### Step 4.2: Build the code
 ```xml
@@ -44,8 +43,19 @@ stage('Build') {
             }
         }
 ```
++ ### Step 4.3: Static code analysis
+```xml
+stage('Static code analysis') {
+            steps {
+        withSonarQubeEnv('sonarqube-token') {
+                    sh  "mvn sonar:sonar"
+                }
+                }
+                
+            }
+```
+     
+### Step 5: Verify whether SonarQube report is generated or not in SonarQube Dashboard.
 
-### Step 5: Verify whether the artifact (jar) is generated or not
-
-#### Congratulations! You have successfully generated the artifact (Jar) file using the Jenkins Pipeline job.
+#### Congratulations. You have successfully Published the static code analysis report in SonarQube using Jenkins Pipeline job.
 
